@@ -49,3 +49,6 @@ mvnw.cmd
 
 # Application properties (contains sensitive data)
 src/main/resources/application.yml
+backend/.env
+backend/src/main/resources/application.yml
+backend/target/classes/application.yml
