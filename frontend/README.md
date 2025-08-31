@@ -47,6 +47,18 @@ cd bmihealthplanner
 ```
 
 ### 2. Database Setup
+
+#### **Option A: Aiven Cloud Database (Recommended)**
+1. Go to [Aiven Console](https://console.aiven.io/)
+2. Create a new MySQL service
+3. Get your connection details:
+   - Host: `your-service-name-your-project.aivencloud.com`
+   - Port: `12345` (usually)
+   - Database: `defaultdb`
+   - Username: `avnadmin`
+   - Password: (from Aiven console)
+
+#### **Option B: Local MySQL**
 ```sql
 -- Create database
 CREATE DATABASE IF NOT EXISTS health_db;
@@ -76,17 +88,17 @@ CREATE TABLE IF NOT EXISTS health_entries (
 ```yaml
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/health_db?serverTimezone=UTC
-    username: root
-    password: 
+    url: jdbc:mysql://your-aiven-host:12345/defaultdb?useSSL=true&sslmode=require&serverTimezone=UTC
+    username: avnadmin
+    password: ${AIVEN_DB_PASSWORD:your-aiven-password}
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
 
 sendgrid:
-  api-key: YOUR_SENDGRID_API_KEY
-  from-email: your-verified-email@domain.com
+  api-key: ${SENDGRID_API_KEY:your-sendgrid-api-key}
+  from-email: ${SENDGRID_FROM_EMAIL:your-verified-email@domain.com}
 ```
 
 ### 4. Start Backend
