@@ -1,0 +1,6 @@
+server:
+  port: 8080
+
+sendgrid:
+  api-key: 
+  from-email: 
